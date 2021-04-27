@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.vrv.vap.swagger2.SwaggerAutoConfiguration

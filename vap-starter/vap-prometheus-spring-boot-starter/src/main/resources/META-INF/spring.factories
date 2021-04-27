@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.vrv.vap.prometheus.config.PrometheusAutoConfiguration

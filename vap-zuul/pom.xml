@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vrv.vap</groupId>
+        <artifactId>vap-cloud</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    <artifactId>vap-zuul</artifactId>
+    <version>0.0.1</version>
+    <name>vap-zuul</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- 注册中心与配置中心依赖 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-prometheus-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-swagger2-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- redis封装库 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-redis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- zuul网关依赖  -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 配置部署的远程仓库，mvn下执行 mvn deploy,测试通过 -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://192.168.119.24:18081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://192.168.119.24:18081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

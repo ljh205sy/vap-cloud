@@ -1,0 +1,87 @@
+server:
+  port: 18443
+spring:
+  session:
+    store-type: redis
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:vrv@1234}
+    timeout: 6000ms
+    lettuce:
+      pool:
+        max-active: 1000
+        max-wait: -1
+        max-idle: 10
+        min-idle: 10
+# 在默认情况下 spring cloud feign在进行各个子服务之间的调用时，http组件使用的是jdk的HttpURLConnection，没有使用线程池。
+# 有2种可选的线程池：HttpClient和OKHttp
+# 比较推荐OKHttp，请求封装的非常简单易用，性能也很ok。
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 1000
+    max-connections-per-route: 100
+  compression:
+    request:
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+      enabled: true
+    response:
+      enabled: true
+  hystrix:
+    enabled: true
+
+#  熔断器并发调优,修改熔断器的线程数量，注意线程数不是越多越好
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+# 主要调整请求的超时时间，是否重试
+ribbon:
+  ConnectTimeout: 30000
+  ServerListRefreshInterval: 15000
+  MaxAutoRetriesNextServer: 0
+  ReadTimeout: 30000
+
+# zuul默认是使用semaphore隔离，并且最大的并发默认是10
+# 1. 修改隔离策略,默认情况下推荐使用 thread 隔离策略
+zuul:
+  add-host-header: true
+  ribbon-isolation-strategy: thread
+  ribbon:
+    threadPool:
+      useSeparateThreadPools: true
+      threadPoolKeyPrefix: api-gateway
+  servlet-path: /
+  sensitive-headers: null
+  host:
+    max-per-route-connections: 1000
+    max-total-connections: 1000
+    connect-timeout-millis: 30000
+    socket-timeout-millis: 30000
+  routes:
+    portal-login:
+      path: /login/
+      url: ${WEBAPP:http://localhost:9999/}
+      stripPrefix: false
+    api-provider:
+      path: /api-provider/**
+      serviceId: api-provider
+      sensitiveHeaders: null
+info:
+  app:
+    name: "api-zuul"
+    description: "服务网关模块"
+    version: "2.2-SNAPSHOT"
+logging:
+  level:
+    com.vrv.vap: debug
+    root: ERROR
+    com.alibaba.nacos: ERROR

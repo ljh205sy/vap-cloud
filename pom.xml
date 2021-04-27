@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vrv.vap</groupId>
+    <artifactId>vap-cloud</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+    <name>vap-cloud</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <vap.version>1.0</vap.version>
+
+        <!-- spring -->
+        <spring-boot.version>2.3.8.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+        <alibaba-cloud.version>2.2.5.RELEASE</alibaba-cloud.version>
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
+
+        <!-- prometheus监控 -->
+        <registry-prometheus.version>1.6.6</registry-prometheus.version>
+
+        <!-- redis -->
+        <redisson-starter.version>3.14.1</redisson-starter.version>
+
+        <!-- mybatis -->
+        <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>         <!--更新-->
+        <pagehelper-spring-boot.version>1.3.0</pagehelper-spring-boot.version> <!--更新-->
+        <mapper.version>4.1.5</mapper.version>
+        <mybatis-generator.version>1.3.5</mybatis-generator.version>
+        <druid.version>1.2.6</druid.version>
+        <mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
+
+        <!-- swagger ui -->
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <swagger-ui.version>1.9.6</swagger-ui.version>
+        <swagger-models.version>1.5.21</swagger-models.version>
+
+        <commons.io.version>2.5</commons.io.version>
+        <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <velocity.version>1.7</velocity.version>
+
+        <commons-codec.version>1.9</commons-codec.version>
+        <gson.version>2.8.2</gson.version>
+        <hutool.version>4.1.19</hutool.version>
+        <fastjson.version>1.2.75</fastjson.version>
+        <jackson-databind.version>2.12.3</jackson-databind.version>
+        <reflections.verison>0.9.12</reflections.verison>
+        <knife4j.version>2.0.5</knife4j.version>
+        <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
+        <jedis.version>3.5.2</jedis.version>
+        <common-pool.version>2.6.2</common-pool.version>
+        <guava.version>26.0-jre</guava.version>
+        <lombok.version>1.18.4</lombok.version>
+
+        <jna-platform.version>5.5.0</jna-platform.version>
+        <jna.version>5.5.0</jna.version>
+        <jasypt.version>3.0.3</jasypt.version>
+        <xtool.version>1.0.0</xtool.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <spring-data-redis.version>1.8.10.RELEASE</spring-data-redis.version>
+        <poi.version>5.0.0</poi.version>
+        <poi-ooxml.version>5.0.0</poi-ooxml.version>
+        <!-- vap服务依赖 -->
+        <api-service.version>0.0.1</api-service.version>
+        <vap-service.version>0.0.1</vap-service.version>
+        <api-config.version>0.0.1</api-config.version>
+        <vap-mybatis.version>0.0.1</vap-mybatis.version>
+        <vap-common.version>0.0.1</vap-common.version>
+        <vap-swagger2-spring-boot-starter.version>0.0.1</vap-swagger2-spring-boot-starter.version>
+        <vap-redis-spring-boot-starter.version>0.0.1</vap-redis-spring-boot-starter.version>
+        <vap-prometheus-spring-boot-starter.version>0.0.1</vap-prometheus-spring-boot-starter.version>
+        <vap-db-spring-boot-starter.version>0.0.1</vap-db-spring-boot-starter.version>
+    </properties>
+
+    <modules>
+        <module>vap-config</module>
+        <module>vap-starter</module>
+        <module>vap-zuul</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <!-- 依赖声明 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置, 可以定义和覆盖父类中的版本号，
+                    例如： redis的版本号父类是1.0， 在此进行定义redis的版本号是2.0，
+                    那么本地就会比父类的版本号低，使用自定义版本号
+             -->
+
+            <!-- https://docs.spring.io/spring-boot/docs/2.4.5/maven-plugin/reference/htmlsingle/ -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--alibaba cloud -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- admin监控 -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
+                <version>${spring-boot-admin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- prometheus监控 -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${registry-prometheus.version}</version>
+            </dependency>
+
+            <!-- 在Redis基础上的一个Java实用工具包 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-starter.version}</version>
+            </dependency>
+
+            <!-- spring session -->
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-bom</artifactId>
+                <version>2020.0.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- swagger ui -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-ui.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger-models.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- mybatis的插件，通用Mapper启动器 -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper-spring-boot.version}</version>
+            </dependency>
+
+            <!--mybatis的插件,分页启动器 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>${mapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+
+            <!--常用工具类 -->
+            <!-- 摘要运算、编码解码的包 -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!--io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!--阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!-- 公共资源池 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${common-pool.version}</version>
+            </dependency>
+
+            <!-- JSON工具类 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+
+            <!-- 类反射 -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.verison}</version>
+            </dependency>
+
+            <!-- 工具类 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+
+            <!-- 文件上传工具类 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+
+            <!-- 代码生成使用模板 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-collections</groupId>
+                        <artifactId>commons-collections</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- excel工具 -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+
+            <!-- 请求返回体及查询, 统一封装  -->
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-common</artifactId>
+                <version>${vap-common.version}</version>
+            </dependency>
+
+
+            <!-- mybatis 统一封装 -->
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-db-spring-boot-starter</artifactId>
+                <version>${vap-db-spring-boot-starter.version}</version>
+            </dependency>
+
+
+
+            <!-- vap服务依赖包 -->
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>api-service</artifactId>
+                <version>${api-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-config</artifactId>
+                <version>${api-config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-service</artifactId>
+                <version>${vap-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-swagger2-spring-boot-starter</artifactId>
+                <version>${vap-swagger2-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-redis-spring-boot-starter</artifactId>
+                <version>${vap-redis-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.vrv.vap</groupId>
+                <artifactId>vap-prometheus-spring-boot-starter</artifactId>
+                <version>${vap-prometheus-spring-boot-starter.version}</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://192.168.119.24:18081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://192.168.119.24:18081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

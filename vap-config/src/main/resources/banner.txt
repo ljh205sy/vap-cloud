@@ -1,0 +1,10 @@
+${AnsiColor.BRIGHT_CYAN}____   __________________   ____        ${AnsiColor.BRIGHT_GREEN}__________.__           .___       __
+${AnsiColor.BRIGHT_CYAN}\   \ /   /\______   \   \ /   /        ${AnsiColor.BRIGHT_GREEN}\______   \__| ____   __| _/____ _/  |______
+${AnsiColor.BRIGHT_CYAN} \   Y   /  |       _/\   Y   /  ______ ${AnsiColor.BRIGHT_GREEN} |    |  _/  |/ ___\ / __ |\__  \\   __\__  \
+${AnsiColor.BRIGHT_CYAN}  \     /   |    |   \ \     /  /_____/ ${AnsiColor.BRIGHT_GREEN} |    |   \  / /_/  > /_/ | / __ \|  |  / __ \_
+${AnsiColor.BRIGHT_CYAN}   \___/    |____|_  /  \___/           ${AnsiColor.BRIGHT_GREEN} |______  /__\___  /\____ |(____  /__| (____  /
+${AnsiColor.BRIGHT_CYAN}                   \/                   ${AnsiColor.BRIGHT_GREEN}       \/  /_____/      \/     \/          \/
+Application Name: ${spring.application.name}
+Application Profile: ${AnsiColor.RED}${spring.profiles.active}${AnsiColor.BLUE}
+Server Port: ${server.port}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}

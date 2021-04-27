@@ -1,0 +1,15 @@
+# 打开所有 Actuator 服务, 并使用prometheus进行监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  # include: health,info
+  endpoint:
+    health:
+      show-details: always
+  # 名称定义
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
