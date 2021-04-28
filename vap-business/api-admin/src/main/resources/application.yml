@@ -1,7 +1,7 @@
 spring:
   datasource:
     druid:
-      enableSlave: false
+      enableSlave: true
       master:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.cj.jdbc.Driver

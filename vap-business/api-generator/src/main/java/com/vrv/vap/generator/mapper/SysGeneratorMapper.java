@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author wh1107066
  */
 @Mapper
 public interface SysGeneratorMapper {

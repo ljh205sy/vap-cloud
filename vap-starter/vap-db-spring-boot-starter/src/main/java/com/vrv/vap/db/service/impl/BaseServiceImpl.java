@@ -109,6 +109,12 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
         List<T> list = this.findByExample(example);
         return new PageInfo(list);
     }
+    @Override
+    public PageInfo<T> findPageExample(Integer pageNum, Integer pageSize, String orderBy, Example example) {
+        PageHelper.startPage(pageNum, pageSize,orderBy);
+        List<T> list = this.findByExample(example);
+        return new PageInfo(list);
+    }
 
     @Override
     public Integer deleteByIds(Class<T> clazz, String property, List<Object> values) {

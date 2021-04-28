@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrv.vap.admin.mapper.SysMenuMapper">
+    <resultMap id="BaseResultMap" type="com.vrv.vap.admin.model.SysMenu">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="path_method" jdbcType="VARCHAR" property="pathMethod"/>
+        <result column="css" jdbcType="VARCHAR" property="css"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="type" jdbcType="BIT" property="type"/>
+        <result column="hidden" jdbcType="BIT" property="hidden"/>
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+
+    </resultMap>
+
+
+    <resultMap id="MenusResultMap" type="com.vrv.vap.admin.model.SysMenu" extends="BaseResultMap">
+        <collection property="children" select="com.vrv.vap.browser.mapper.SysMenuMapper.queryChildrenByMenuId"
+                    column="id" ofType="com.vrv.vap.admin.model.SysMenu" fetchType="eager"/>
+    </resultMap>
+
+
+    <!-- 依靠id进行查询Menu -->
+    <select id="queryByMenuId" parameterType="int" resultMap="BaseResultMap">
+        SELECT * FROM sys_menu WHERE id = #{id} ORDER BY sort
+    </select>
+
+
+    <select id="queryMenusByRoleId" parameterType="integer" resultType="com.vrv.vap.admin.model.SysMenu">
+        select m.*
+        from sys_menu m
+                 inner join sys_role_menu srm
+                            on srm.menu_id = m.id
+        where srm.role_id = #{rid}
+    </select>
+
+    <select id="queryChildrenByParentId" parameterType="com.vrv.vap.admin.model.SysMenu" resultMap="MenusResultMap">
+        SELECT * FROM sys_menu
+        <where>
+            <if test="parentId != null">
+                and  parent_id = #{parentId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </where>
+        ORDER BY sort
+    </select>
+
+    <select id="queryByTenantId" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM sys_menu where  tenant_id = #{tenantId}  ORDER BY sort
+    </select>
+
+</mapper>

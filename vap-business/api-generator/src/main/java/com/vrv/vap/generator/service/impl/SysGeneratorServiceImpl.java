@@ -44,7 +44,7 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
         logger.info("当前页数: " + pageInfo.getPageNum());
         logger.info("当前页面记录数量: " + pageInfo.getSize());
 
-        return PageResult.<Map<String, Object>>builder().data(list).code(0).count(pageInfo.getTotal()).build();
+        return PageResult.<Map<String, Object>>builder().list(list).code(0).total(pageInfo.getTotal()).build();
     }
 
     @Override

@@ -80,6 +80,15 @@ public interface BaseService<T, ID extends Serializable> {
     PageInfo<T> findPageExample(Integer page, Integer rows, Example example);
 
     /**
+     * 按条件分页查询，返回分页对象
+     * @param pageNum   第几页开始
+     * @param pageSize  查询几条数据
+     * @param orderBy   排序字段
+     * @param example   条件查询
+     * @return    返回分页对象
+     */
+    PageInfo<T> findPageExample(Integer pageNum, Integer pageSize, String orderBy, Example example);
+    /**
      *
      * @param record 对象中含有空字段的不插入到数据库中
      * @return 操作的数量

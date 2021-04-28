@@ -1,14 +1,14 @@
 package com.vrv.vap.admin.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
-/**
- * @author wh1107066
- */
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
 @Table(name = "sys_user")
-public class SysUserModel implements Serializable {
+public class SysUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -17,6 +17,7 @@ public class SysUserModel implements Serializable {
 
     private String password;
 
+    @Column(name = "nickname")
     private String nickname;
 
     @Column(name = "head_img_url")
@@ -30,9 +31,13 @@ public class SysUserModel implements Serializable {
 
     private String type;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     @Column(name = "create_time")
     private Date createTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     @Column(name = "update_time")
     private Date updateTime;
 
@@ -43,6 +48,38 @@ public class SysUserModel implements Serializable {
 
     @Column(name = "is_del")
     private Boolean isDel;
+
+    private List<SysRole> roles;
+
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
+
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", headImgUrl='" + headImgUrl + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", sex=" + sex +
+                ", enabled=" + enabled +
+                ", type='" + type + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", company='" + company + '\'' +
+                ", openId='" + openId + '\'' +
+                ", isDel=" + isDel +
+                ", roles=" + roles +
+                '}';
+    }
 
     /**
      * @return id

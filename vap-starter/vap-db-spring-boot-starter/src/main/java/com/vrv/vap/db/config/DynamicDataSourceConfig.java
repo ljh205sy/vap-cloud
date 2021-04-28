@@ -45,7 +45,7 @@ public class DynamicDataSourceConfig {
 
     @Bean
     @ConfigurationProperties("spring.datasource.druid.slave")
-    @ConditionalOnProperty(prefix = "spring.datasource.druid.slave", name = "enabled", havingValue = "true")
+    @ConditionalOnProperty(prefix = "spring.datasource.druid", name = "enableSlave", havingValue = "true")
     public DataSource slaveDataSource() {
         DruidDataSource druidDataSource = DruidDataSourceBuilder.create().build();
         DruidDataSource slave = druidProperties.dataSource(druidDataSource);
@@ -54,15 +54,13 @@ public class DynamicDataSourceConfig {
 
     @Bean
     @Primary
-    public DynamicDataSource dataSource()
-    {
+    public DynamicDataSource dataSource(DataSource masterDataSource, DataSource slaveDataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource());
-        if (druidProperties.enableSlave)
-        {
-            targetDataSources.put(DataSourceType.SLAVE.name(), slaveDataSource());
+        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
+        if (druidProperties.enableSlave) {
+            targetDataSources.put(DataSourceType.SLAVE.name(), slaveDataSource);
         }
-        return new DynamicDataSource(masterDataSource(), targetDataSources);
+        return new DynamicDataSource(masterDataSource, targetDataSources);
     }
 
     @Bean

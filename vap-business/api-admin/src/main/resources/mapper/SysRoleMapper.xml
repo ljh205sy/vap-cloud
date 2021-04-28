@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrv.vap.admin.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.vrv.vap.admin.model.SysRole">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+        <collection property="menus" select="com.vrv.vap.browser.mapper.SysMenuMapper.queryMenusByRoleId" column="id"
+                    ofType="com.vrv.vap.admin.model.SysMenu"/>
+    </resultMap>
+
+
+    <select id="queryRolesByUid" resultType="com.vrv.vap.admin.model.SysRole" parameterType="int">
+        select *
+        from sys_role r
+                 inner join sys_role_user ru
+                            on ru.role_id = r.id
+        where ru.user_id = #{uid}
+    </select>
+
+    <select id="queryMenusByRid" resultMap="BaseResultMap" parameterType="integer">
+        select *
+        from sys_role r
+        where r.id = #{rid}
+    </select>
+</mapper>
