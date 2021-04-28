@@ -77,11 +77,7 @@ zuul:
       sensitiveHeaders: null
 info:
   app:
-    name: "api-zuul"
+    name: "vap-zuul"
     description: "服务网关模块"
     version: "2.2-SNAPSHOT"
-logging:
-  level:
-    com.vrv.vap: debug
-    root: ERROR
-    com.alibaba.nacos: ERROR
+

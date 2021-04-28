@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.vrv.vap.db.config.DruidProperties,\
+com.vrv.vap.db.config.DynamicDataSourceConfig,\
 com.vrv.vap.db.aop.DataSourceAspect,\
 com.vrv.vap.db.config.MapperScanConfig

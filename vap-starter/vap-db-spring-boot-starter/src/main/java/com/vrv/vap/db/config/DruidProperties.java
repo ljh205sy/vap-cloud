@@ -3,7 +3,6 @@ package com.vrv.vap.db.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * druid 配置属性
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @author ruoyi
  */
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "spring.datasource.druid")
 public class DruidProperties {
     /**
@@ -28,6 +26,7 @@ public class DruidProperties {
     private boolean testWhileIdle;
     private boolean testOnBorrow;
     private boolean testOnReturn;
+    public boolean enableSlave ;
 
     public DruidDataSource dataSource(DruidDataSource datasource) {
         /** 配置初始化大小、最小、最大 */

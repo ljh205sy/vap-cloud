@@ -51,7 +51,7 @@ public class DataSourceAspect implements Ordered {
             return point.proceed();
         } finally {
             DynamicDataSourceHelper.clearDataSourceType();
-            logger.info("clean datasource");
+            logger.info("ThreadLocal清除缓存 datasource");
         }
     }
 

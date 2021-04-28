@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.vrv.vap.common.feign.fallback.SysUserServiceFallbackFactory,\
+com.vrv.vap.common.resolver.LoginTokenArgumentResolver

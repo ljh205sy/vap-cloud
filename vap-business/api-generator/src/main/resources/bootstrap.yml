@@ -1,0 +1,7 @@
+server:
+  port: 7300
+spring:
+  application:
+    name: api-generator
+  profiles:
+    active: dev

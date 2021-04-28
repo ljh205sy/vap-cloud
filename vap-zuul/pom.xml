@@ -18,10 +18,20 @@
     </properties>
 
     <dependencies>
-        <!-- 注册中心与配置中心依赖 -->
+        <!-- 注册中心 -->
         <dependency>
             <groupId>com.vrv.vap</groupId>
             <artifactId>vap-service</artifactId>
+        </dependency>
+        <!-- 与配置中心依赖 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-config</artifactId>
+        </dependency>
+        <!-- 基础封装与依赖 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vrv.vap</groupId>

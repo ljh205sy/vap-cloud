@@ -66,6 +66,12 @@
         <spring-data-redis.version>1.8.10.RELEASE</spring-data-redis.version>
         <poi.version>5.0.0</poi.version>
         <poi-ooxml.version>5.0.0</poi-ooxml.version>
+
+        <jjwt.version>0.9.1</jjwt.version>
+        <jasypt.version>1.14</jasypt.version>
+        <sharding-sphere.version>3.1.0</sharding-sphere.version>
+        <security-oauth2.version>2.3.8.RELEASE</security-oauth2.version>
+        <security-jwt.version>1.1.0.RELEASE</security-jwt.version>
         <!-- vap服务依赖 -->
         <api-service.version>0.0.1</api-service.version>
         <vap-service.version>0.0.1</vap-service.version>
@@ -81,7 +87,8 @@
     <modules>
         <module>vap-config</module>
         <module>vap-starter</module>
-        <module>vap-zuul</module>
+        <module>vap-common</module>
+        <module>vap-service</module>
     </modules>
 
     <dependencies>
@@ -209,6 +216,31 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-core</artifactId>
                 <version>${mybatis-generator.version}</version>
+            </dependency>
+
+            <!-- 加入spring security spring security oauth2的处理 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${security-jwt.version}</version>
+            </dependency>
+
+            <!-- 加入json web token处理 -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-sphere.version}</version>
             </dependency>
 
             <!--常用工具类 -->
@@ -354,11 +386,6 @@
 
 
             <!-- vap服务依赖包 -->
-            <dependency>
-                <groupId>com.vrv.vap</groupId>
-                <artifactId>api-service</artifactId>
-                <version>${api-service.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.vrv.vap</groupId>
                 <artifactId>vap-config</artifactId>

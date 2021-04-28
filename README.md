@@ -1,2 +1,0 @@
-# vap-cloud
-vap-cloud

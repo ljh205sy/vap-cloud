@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vrv.vap</groupId>
+        <artifactId>vap-business</artifactId>
+        <version>0.0.1</version>
+    </parent>
+    <artifactId>api-admin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>api-admin</name>
+
+    <dependencies>
+        <!-- 依赖, 由各个服务去引用， 如果存在中间模块引用，会存在不同的版本，存在依赖传递情况  -->
+
+        <!-- 配置中心依赖 及公共配置继承-->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-config</artifactId>
+        </dependency>
+        <!-- 注册中心及web开发组件 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-service</artifactId>
+        </dependency>
+        <!-- 公共的异常及公共的代码 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-common</artifactId>
+        </dependency>
+        <!-- redis公共的代码 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-redis-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- mybatis数据库的统一封装 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-db-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- swagger接口引用 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-swagger2-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- prometheus接口引用 -->
+        <dependency>
+            <groupId>com.vrv.vap</groupId>
+            <artifactId>vap-prometheus-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- springboot测试 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- 配置部署的远程仓库，mvn下执行 mvn deploy,测试通过 -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://192.168.119.24:18081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://192.168.119.24:18081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

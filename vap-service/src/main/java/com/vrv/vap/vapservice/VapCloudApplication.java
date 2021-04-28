@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = {"com.vrv.vap"}, exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public @interface VapCloudApplication {
 }
