@@ -27,14 +27,20 @@ import java.util.Map;
  * date 2021/4/24 17:33
  */
 @Configuration
+@EnableConfigurationProperties(DruidProperties.class)
 @AutoConfigureBefore({DataSourceAutoConfiguration.class, DruidDataSourceAutoConfigure.class})
 @AutoConfigureAfter(DruidProperties.class)
-@EnableConfigurationProperties(DruidProperties.class)
 public class DynamicDataSourceConfig {
 
     @Autowired
     private DruidProperties druidProperties;
 
+    /**
+     * 通过全限定名进行配置的绑定，这里的ConfigurationProperties其实就类似于使用多个@Value同时绑定，
+     * 绑定的对象就是DataSource类型的对象，而且是 隐式绑定 的，意味着在配置文件编写的时候需要与对应类的字段名称相同，
+     * https://www.cnblogs.com/tian874540961/p/12146467.html
+     * @return 主数据源
+     */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.master")
     public DataSource masterDataSource() {
@@ -43,6 +49,11 @@ public class DynamicDataSourceConfig {
         return master;
     }
 
+    /**
+     * 把spring.datasource.druid.slave 关联配置文件进行绑定到slaveDataSource的bean中，，然后将此Bean归还给容器
+     * DataSource中也存在url的属性。 把前缀spring.datasource.druid.slave的下的属性值进行绑定。
+     * @return 第二数据源对象
+     */
     @Bean
     @ConfigurationProperties("spring.datasource.druid.slave")
     @ConditionalOnProperty(prefix = "spring.datasource.druid", name = "enableSlave", havingValue = "true")

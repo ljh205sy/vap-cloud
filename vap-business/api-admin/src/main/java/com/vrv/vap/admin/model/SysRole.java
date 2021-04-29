@@ -12,8 +12,7 @@ import java.util.List;
  * @author wh1107066
  */
 @Table(name = "sys_role")
-// mybatis采用了懒加载,而springmvc中利用@ResponseBody注解返回实体类的JSON时会抛异常:
-@JsonIgnoreProperties(value = { "handler" })
+@JsonIgnoreProperties(value = "handler")
 public class SysRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

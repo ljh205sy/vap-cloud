@@ -1,6 +1,7 @@
 package com.vrv.vap.admin.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Table(name = "sys_user")
+@JsonIgnoreProperties(value = "handler")
 public class SysUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

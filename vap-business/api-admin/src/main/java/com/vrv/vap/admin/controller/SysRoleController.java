@@ -38,22 +38,22 @@ public class SysRoleController extends BaseController {
      * 直接获取参数进行查询
      *
      * @param name 界面上查询条件
-     * @param page 第几个位置开始查找
-     * @param rows 每次查找多少条数据
+     * @param pageNum 第几个页开始查找
+     * @param pageSize 每次查找多少条数据
      * @return 返回分页对象
      */
     @GetMapping("/test")
     @ApiImplicitParams({@ApiImplicitParam(name = "name", value = "角色名称"),
-            @ApiImplicitParam(name = "page", value = "第几条开始"),
-            @ApiImplicitParam(name = "size", value = "每页显示几条")})
+            @ApiImplicitParam(name = "pageNum", value = "第几条开始"),
+            @ApiImplicitParam(name = "pageSize", value = "每页显示几条")})
     @ApiOperation(value = "角色分页对象")
-    public PageResult<SysRole> queryRoleByExampleAndPagination(@RequestParam String name, @RequestParam int page, @RequestParam(name = "size") int rows) {
+    public PageResult<SysRole> queryRoleByExampleAndPagination(@RequestParam String name, @RequestParam int pageNum, @RequestParam(name = "pageSize") int pageSize) {
         Example example = new Example(SysRole.class);
         Example.Criteria criteria = example.createCriteria();
         if (!StringUtils.isEmpty(name)) {
             criteria.andLike("name", "%" + name + "%");
         }
-        PageInfo<SysRole> pageExample = sysRoleService.findPageExample(page, rows, example);
+        PageInfo<SysRole> pageExample = sysRoleService.findPageExample(pageNum, pageSize, example);
         return PageResult.succeed(pageExample);
     }
 
@@ -63,7 +63,7 @@ public class SysRoleController extends BaseController {
      * 返回分页对象
      */
     @GetMapping
-    @ApiOperation(value = "查询角色分页显示", notes = "询角色分页显示")
+    @ApiOperation(value = "查询角色分页显示", notes = "角色分页显示")
     public PageResult<SysRole> queryRoleAndPagination(RoleVO roleVO) {
         PageInfo<SysRole> pageInfo;
         Example example = new Example(SysRole.class);

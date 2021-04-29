@@ -23,7 +23,7 @@
 
     <resultMap id="UserAndRoleMap" type="com.vrv.vap.admin.model.SysUser" extends="BaseResultMap">
         <collection fetchType="lazy" property="roles"  column="id"
-                    select="com.vrv.vap.browser.mapper.SysRoleMapper.queryRolesByUid" />
+                    select="com.vrv.vap.admin.mapper.SysRoleMapper.queryRolesByUid" />
     </resultMap>
 
     <select id="queryUserAndRolesByUid" parameterType="int" resultMap="UserAndRoleMap">

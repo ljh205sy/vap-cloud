@@ -1,5 +1,7 @@
 package com.vrv.vap.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
  * @author wh1107066
  */
 @Table(name = "sys_menu")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class SysMenu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
